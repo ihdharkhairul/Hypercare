@@ -1,0 +1,199 @@
+:root{
+  --primary:#F4A300;
+  --primary-dark:#D88C00;
+  --secondary:#FFF8E7;
+  --text:#1E293B;
+  --bg:#FFFFFF;
+  --success:#22A559;
+  --warning:#F4A300;
+  --danger:#E53E3E;
+  --muted:#94A3B8;
+}
+
+*{font-family:'Plus Jakarta Sans', sans-serif;}
+.font-display{font-family:'Sora', sans-serif;}
+
+body{ color:var(--text); background:var(--bg); }
+
+.bg-primary{ background-color:var(--primary)!important; }
+.bg-secondary{ background-color:var(--secondary)!important; }
+.text-primary{ color:var(--primary)!important; }
+.text-hover:hover{ color:var(--primary-dark)!important; }
+.border-primary{ border-color:var(--primary)!important; }
+
+.btn-primary{
+  background-color:var(--primary);
+  color:#fff;
+  border-radius:12px;
+  padding:.65rem 1.5rem;
+  font-weight:600;
+  transition: background-color .18s ease, transform .15s ease, box-shadow .18s ease;
+  border:none;
+  display:inline-block;
+  cursor:pointer;
+}
+.btn-primary:hover{ background-color:var(--primary-dark); color:#fff; transform:translateY(-1px); box-shadow:0 4px 12px rgba(180,130,30,.25); }
+.btn-primary:active{ transform:translateY(0) scale(0.97); box-shadow:none; }
+
+.btn-outline{
+  border:1.5px solid var(--primary);
+  color:var(--primary);
+  border-radius:12px;
+  padding:.6rem 1.45rem;
+  font-weight:600;
+  background:transparent;
+  transition: background-color .18s ease, color .18s ease, transform .15s ease;
+  display:inline-block;
+  cursor:pointer;
+}
+.btn-outline:hover{ background-color:var(--secondary); color:var(--primary-dark); }
+.btn-outline:active{ transform:scale(0.97); }
+
+.card-soft{
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 4px 24px rgba(30,41,59,.06);
+  border:1px solid #F1EDE3;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card-soft:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(30,41,59,.09); }
+
+.input-soft{
+  border:1.5px solid #E7E2D4;
+  border-radius:12px;
+  padding:.7rem 1rem;
+  width:100%;
+  background:#FFFDF8;
+  transition:border-color .2s;
+}
+.input-soft:focus{ outline:none; border-color:var(--primary); background:#fff; }
+
+.badge-status{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  font-size:.75rem;
+  font-weight:600;
+  padding:.3rem .7rem;
+  border-radius:999px;
+}
+.badge-normal{ background:#E7F8EE; color:#1F9D55; }
+.badge-pra{ background:#FFF3D6; color:#B7791F; }
+.badge-tk1{ background:#FFE3D1; color:#C2410C; }
+.badge-tk2{ background:#FDE2E2; color:#C53030; }
+
+.sidebar-link{
+  display:flex; align-items:center; gap:.75rem;
+  padding:.7rem 1rem; border-radius:12px;
+  color:#475569; font-weight:500; font-size:.92rem;
+  transition:all .2s ease;
+  text-decoration:none;
+}
+.sidebar-link:hover{ background:var(--secondary); color:var(--primary-dark); }
+.sidebar-link.active{ background:var(--primary); color:#fff; box-shadow:0 4px 14px rgba(244,163,0,.35); }
+
+.navbar-link{
+  color:#475569; font-weight:500; font-size:.95rem; position:relative;
+  text-decoration:none;
+  transition: color 0.18s ease;
+}
+.navbar-link:hover, .navbar-link.active{ color:var(--primary-dark); }
+
+.chat-bubble-me{
+  background:var(--primary); color:#fff;
+  border-radius:16px 16px 4px 16px;
+}
+.chat-bubble-other{
+  background:var(--secondary); color:var(--text);
+  border-radius:16px 16px 16px 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar{width:6px;height:6px;}
+.scrollbar-thin::-webkit-scrollbar-thumb{background:#E7E2D4;border-radius:10px;}
+
+.typing-dot{ width:6px;height:6px;border-radius:50%;background:#B58A2E;display:inline-block;animation:blink 1.2s infinite ease-in-out; }
+.typing-dot:nth-child(2){animation-delay:.2s;}
+.typing-dot:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,80%,100%{opacity:.25;}40%{opacity:1;}}
+
+.hc-toast{
+  position:fixed; top:20px; right:20px; z-index:999;
+  padding:.75rem 1.25rem; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,.15);
+  color:#fff; font-weight:500; font-size:.875rem;
+  display:flex; align-items:center; gap:.5rem;
+  animation:fadeInDown .3s ease;
+}
+@keyframes fadeInDown{ from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);} }
+
+@media (max-width: 768px){
+  .sidebar-mobile{ position:fixed; left:-280px; top:0; height:100vh; z-index:50; transition:left .25s ease; }
+  .sidebar-mobile.open{ left:0; }
+}
+
+/* Desktop/tablet: sidebar tetap diam di tempat (sticky), tidak ikut
+   scroll bareng konten dashboard di sebelahnya. */
+@media (min-width: 769px){
+  .sidebar-mobile{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* ── Page Transition ─────────────────────────────────────── */
+/* Animasi ini di-trigger tiap kali <PageTransition> di-mount */
+/* Tidak mempengaruhi desain elemen di dalamnya sama sekali.  */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageEnterFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.page-transition {
+  animation: pageEnter 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+/* Halaman landing (Home) pakai fade saja karena panjang & ada hero image */
+.page-transition-fade {
+  animation: pageEnterFade 0.22s ease both;
+  will-change: opacity;
+}
+
+/* Kurangi motion untuk user yang prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-transition,
+  .page-transition-fade {
+    animation: none;
+  }
+}
+
+/* ── Sidebar link active transition ─────────────────────── */
+/* Tambahkan transisi pada sidebar-link untuk perpindahan    */
+/* yang lebih smooth saat menu diklik — tidak mengubah warna */
+.sidebar-link {
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.15s ease;
+}
+.sidebar-link:active {
+  transform: scale(0.97);
+}
+
+/* ── Smooth scroll ke atas saat navigasi ────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Card hover lift yang lebih smooth ──────────────────── */
+/* card-soft hover sudah didefinisikan di atas — ini hanya   */
+/* memastikan transform dipakai (tidak duplikat) */

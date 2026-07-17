@@ -1,0 +1,36 @@
+Options -Indexes
+
+# ------------------------------------------------------------
+# WAJIB: Teruskan header Authorization ke PHP
+# Secara default Apache/XAMPP TIDAK meneruskan header ini,
+# sehingga $_SERVER['HTTP_AUTHORIZATION'] selalu kosong dan
+# semua endpoint yang butuh requireAuth()/requireRole() gagal
+# dengan 401 walau token valid.
+# ------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} ^(.+)$
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%1]
+</IfModule>
+
+# Alternatif/tambahan untuk environment yang pakai CGI/FastCGI (mis. beberapa
+# konfigurasi shared hosting). Aman dinyalakan bareng rule di atas.
+<IfModule mod_setenvif.c>
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+</IfModule>
+
+# CORS ditangani oleh PHP (config/helpers.php setCorsHeaders())
+# JANGAN tambahkan header CORS di sini — akan menyebabkan duplicate header
+
+# ------------------------------------------------------------
+# Preflight OPTIONS
+# CATATAN: rule redirect [R=200] versi lama DIHAPUS karena tidak valid
+# (kode 200 bukan kode redirect yang sah) dan berpotensi membuat
+# browser gagal memproses response preflight dengan benar.
+# PHP (setCorsHeaders()) sudah menangani OPTIONS dengan exit 200 langsung,
+# jadi request OPTIONS cukup diteruskan apa adanya ke PHP tanpa rewrite.
+# ------------------------------------------------------------
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>

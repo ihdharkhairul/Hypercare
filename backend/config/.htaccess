@@ -1,0 +1,2 @@
+# Mencegah akses langsung ke file konfigurasi (DB credentials, OpenAI key, dll)
+Deny from all
